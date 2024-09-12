@@ -1,14 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUserState } from "../../TypesAndInterfaces/typesOrInterfaces";
 import { fetchUsers } from "./usersOperations";
-
-// export interface IUserState {
-//   users: Array<IUser>;
-// }
-
-const initialState: IUserState = {
-  users: [],
-};
+import { initialState } from "./initialState";
 
 const usersSlice = createSlice({
   name: "user",

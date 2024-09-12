@@ -6,9 +6,18 @@ export interface IUser {
   phone: string;
 }
 
+export type IFilterUser = Omit<IUser, "id">;
+
 export type AllUsers = Array<IUser>;
 
 // export type IUserState = Array<IUser>;
+
 export interface IUserState {
   users: Array<IUser>;
+  filter: IFilterUser;
 }
+
+// export interface IUserState {
+//   users: Array<IUser>;
+//   filter: "";
+// }

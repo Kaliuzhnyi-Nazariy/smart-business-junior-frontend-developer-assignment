@@ -3,8 +3,23 @@ import "./App.css";
 import { useAppDispatch } from "./hooks/useAppDispatch";
 import { fetchUsers } from "./api/users/usersOperations";
 import { useSelector } from "react-redux";
-import { selectUsers } from "./api/users/usersSelector";
+import {
+  usersFilteredEmail,
+  // usersFiltered,
+  // filteredUsersByName,
+  // selectFilter,
+  selectUsers,
+  usersFilteredName,
+  usersFilteredUsername,
+  usersFilteredPhone,
+} from "./api/users/usersSelector";
 import { IUser } from "./TypesAndInterfaces/typesOrInterfaces";
+import {
+  updateFilterEmail,
+  updateFilterName,
+  updateFilterPhone,
+  updateFilterUsername,
+} from "./api/users/filterSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -14,15 +29,55 @@ function App() {
   const [positionEmail, setpositionEmail] = useState("down");
   const [positionPhone, setpositionPhone] = useState("down");
 
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
   const users = useSelector(selectUsers);
 
   useEffect(() => {
     setUsersList(users);
   }, [users]);
 
+  // const filter = useSelector(selectFilter);
+  // useEffect(() => {
+  //   console.log(filter?.filter);
+  // }, [filter]);
+
+  const NameUsers = useSelector(usersFilteredName);
+  const UsernameUsers = useSelector(usersFilteredUsername);
+  const EmailUsers = useSelector(usersFilteredEmail);
+  const PhoneUsers = useSelector(usersFilteredPhone);
+
   useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
+    setUsersList(NameUsers);
+  }, [NameUsers]);
+
+  useEffect(() => {
+    setUsersList(UsernameUsers);
+  }, [UsernameUsers]);
+
+  useEffect(() => {
+    setUsersList(EmailUsers);
+  }, [EmailUsers]);
+
+  useEffect(() => {
+    setUsersList(PhoneUsers);
+  }, [PhoneUsers]);
+
+  useEffect(() => {
+    if (!usersList) {
+      setUsersList(users);
+    }
+  }, [users, usersList]);
+
+  // const justChecking = useSelector(usersFilteredName);
+  // // const justChecking = useSelector(usersFilteredEmail);
+  // // const justChecking = useSelector(usersFilteredUsername);
+  // // const justChecking = useSelector(usersFilteredPhone);
+  // useEffect(() => {
+  //   console.log(justChecking);
+  // }, [justChecking]);
 
   const handleSortName = () => {
     setpositionUsername("down");
@@ -30,13 +85,13 @@ function App() {
     setpositionPhone("down");
 
     if (positionName === "down") {
-      const sortedUsersByName = [...users].sort((a, b) =>
+      const sortedUsersByName = [...usersList].sort((a, b) =>
         b.name.localeCompare(a.name)
       );
       setUsersList(sortedUsersByName);
       setpositionName("up");
     } else {
-      const sortedUsersByName = [...users].sort((a, b) =>
+      const sortedUsersByName = [...usersList].sort((a, b) =>
         a.name.localeCompare(b.name)
       );
       setUsersList(sortedUsersByName);
@@ -50,13 +105,13 @@ function App() {
     setpositionPhone("down");
 
     if (positionUsername === "down") {
-      const sortedUsersByUsername = [...users].sort((a, b) =>
+      const sortedUsersByUsername = [...usersList].sort((a, b) =>
         b.username.localeCompare(a.username)
       );
       setUsersList(sortedUsersByUsername);
       setpositionUsername("up");
     } else {
-      const sortedUsersByUsername = [...users].sort((a, b) =>
+      const sortedUsersByUsername = [...usersList].sort((a, b) =>
         a.username.localeCompare(b.username)
       );
       setUsersList(sortedUsersByUsername);
@@ -70,13 +125,13 @@ function App() {
     setpositionPhone("down");
 
     if (positionEmail === "down") {
-      const sortedUsersByEmail = [...users].sort((a, b) =>
+      const sortedUsersByEmail = [...usersList].sort((a, b) =>
         b.email.localeCompare(a.email)
       );
       setUsersList(sortedUsersByEmail);
       setpositionEmail("up");
     } else {
-      const sortedUsersByEmail = [...users].sort((a, b) =>
+      const sortedUsersByEmail = [...usersList].sort((a, b) =>
         a.email.localeCompare(b.email)
       );
       setUsersList(sortedUsersByEmail);
@@ -90,7 +145,7 @@ function App() {
     setpositionEmail("down");
 
     if (positionPhone === "down") {
-      const sortedUsersByPhone = [...users].sort((a, b) => {
+      const sortedUsersByPhone = [...usersList].sort((a, b) => {
         const phoneA = a.phone.replace(/\D/g, "");
         const phoneB = b.phone.replace(/\D/g, "");
         return phoneB.localeCompare(phoneA);
@@ -98,7 +153,7 @@ function App() {
       setUsersList(sortedUsersByPhone);
       setpositionPhone("up");
     } else {
-      const sortedUsersByPhone = [...users].sort((a, b) => {
+      const sortedUsersByPhone = [...usersList].sort((a, b) => {
         const phoneA = a.phone.replace(/\D/g, "");
         const phoneB = b.phone.replace(/\D/g, "");
         return phoneA.localeCompare(phoneB);
@@ -110,6 +165,49 @@ function App() {
 
   return (
     <div className="">
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="name"
+        onChange={(e) => {
+          dispatch(updateFilterName(e.target.value));
+          // checkTheory("name", e.target.value);
+        }}
+        // onFocus={() => chooseFilteredList("name")}
+      />
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="email"
+        onChange={(e) => {
+          dispatch(updateFilterEmail(e.target.value));
+          // checkTheory("email", e.target.value);
+        }}
+      />
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="username"
+        onChange={(e) => {
+          dispatch(updateFilterUsername(e.target.value));
+          // checkTheory("email", e.target.value);
+        }}
+        // onFocus={checkTheory("email", "le")}
+      />
+      <input
+        type="text"
+        name=""
+        id=""
+        placeholder="phone"
+        onChange={(e) => {
+          dispatch(updateFilterPhone(e.target.value));
+          // checkTheory("email", e.target.value);
+        }}
+        // onFocus={checkTheory("email", "le")}
+      />
       <table>
         <thead>
           <tr>
@@ -140,30 +238,55 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {usersList.length > 0 ? (
-            usersList.map((user: IUser) => {
-              return (
-                <tr key={user.id}>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.name}
-                  </td>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.username}
-                  </td>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.email}
-                  </td>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.phone}
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td>Loading ...</td>
-            </tr>
-          )}
+          {/* {usersList?.length < 0 */}
+          {
+            usersList?.length > 0
+              ? usersList.map((user: IUser) => {
+                  return (
+                    <tr key={user.id}>
+                      <td
+                        style={{ outline: "2px solid white", padding: "8px" }}
+                      >
+                        {user.name}
+                      </td>
+                      <td
+                        style={{ outline: "2px solid white", padding: "8px" }}
+                      >
+                        {user.username}
+                      </td>
+                      <td
+                        style={{ outline: "2px solid white", padding: "8px" }}
+                      >
+                        {user.email}
+                      </td>
+                      <td
+                        style={{ outline: "2px solid white", padding: "8px" }}
+                      >
+                        {user.phone}
+                      </td>
+                    </tr>
+                  );
+                })
+              : ""
+            // Check.map((user: IUser) => {
+            //       return (
+            //         <tr key={user.id}>
+            //           <td style={{ outline: "2px solid white", padding: "8px" }}>
+            //             {user.name}
+            //           </td>usersList
+            //           <td style={{ outline: "2px solid white", padding: "8px" }}>
+            //             {user.username}
+            //           </td>
+            //           <td style={{ outline: "2px solid white", padding: "8px" }}>
+            //             {user.email}
+            //           </td>
+            //           <td style={{ outline: "2px solid white", padding: "8px" }}>
+            //             {user.phone}
+            //           </td>
+            //         </tr>
+            //       );
+            //     })
+          }
         </tbody>
       </table>
       <button
@@ -182,3 +305,48 @@ function App() {
 }
 
 export default App;
+
+// const userListFiltered = useSelector(usersFiltered);
+// // const checkEmail = useSelector(filteredUsersByEmail);
+// // console.log(filter);
+
+// // const checkTheory = (type: string, value: string) => {
+// //   console.log(value);
+// //   switch (type) {
+// //     case "name":
+// //       // dispatch(updateFilterName(value));
+// // setUsersListCheck(checkName);
+// //       break;
+// //     case "email":
+// //       // dispatch(updateFilterName(value));
+// //       // setUsersListCheck(checkEmail);
+// //       break;
+// //     default:
+// //       // setUsersListCheck(users);
+// //   }
+// // };
+
+// // useEffect(() => {
+// //   setUsersListCheck(usersListCheck);
+// // }, [
+// //   dispatch,
+// //   usersListCheck,
+// //   // checkName,
+// //   checkEmail,
+// // ]);
+
+// // useEffect(() => {
+// //   setUsersListCheck(users);
+// // }, [users]);
+
+// // console.log("usersListCheck: ", usersListCheck);
+
+// useEffect(() => {
+//   console.log("userListFiltered: ", userListFiltered);
+// }, [userListFiltered]);
+
+// console.log(usersList);
+
+// useEffect(() => {
+//   dispatch(fetchUsers());
+// }, [dispatch]);
