@@ -29,6 +29,8 @@ export const usersFilteredName = createSelector(
       return users.filter((user) =>
         user.name.toLowerCase().includes(filterValue.toLowerCase())
       );
+    } else {
+      return users;
     }
   }
 );
@@ -36,7 +38,6 @@ export const usersFilteredName = createSelector(
 export const usersFilteredEmail = createSelector(
   [selectUsers, selectFilterEmail],
   (users, filterValue) => {
-    console.log(users);
     return users.filter((user) =>
       user.email.toLowerCase().includes(filterValue.toLowerCase())
     );
