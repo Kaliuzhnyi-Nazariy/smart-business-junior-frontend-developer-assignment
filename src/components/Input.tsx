@@ -6,6 +6,8 @@ import {
   updateFilterUsername,
 } from "../api/users/filterSlice";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import { IoSearch } from "react-icons/io5";
+import { IoMdClose } from "react-icons/io";
 
 interface Prop {
   inputField: string;
@@ -58,10 +60,14 @@ const Input = ({ inputField, previousField, setPreviousField }: Prop) => {
         }}
         value={fieldInput}
       />
-      <button onClick={handleCloseField}>❌</button>
+      <button onClick={handleCloseField}>
+        <IoMdClose />
+      </button>
     </>
   ) : (
-    <button onClick={handleOpenField}>🔎</button>
+    <button onClick={handleOpenField}>
+      <IoSearch></IoSearch>
+    </button>
   );
 };
 
