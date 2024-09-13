@@ -4,6 +4,12 @@ import { IUser } from "../../TypesAndInterfaces/typesOrInterfaces";
 export const selectUsers = (state: { users: { users: Array<IUser> } }) =>
   state.users.users;
 
+export const selectIsLoading = (state: { users: { loading: boolean } }) =>
+  state.users.loading;
+
+export const selectIsError = (state: { users: { error: unknown } }) =>
+  state.users.error;
+
 // export const selectFilter = (state: { filter: unknown }) => state.filter;
 
 export const selectFilterName = (state: {

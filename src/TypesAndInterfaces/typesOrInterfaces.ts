@@ -14,6 +14,8 @@ export type AllUsers = Array<IUser>;
 
 export interface IUserState {
   users: Array<IUser>;
+  loading: boolean;
+  error: unknown | null;
   filter: IFilterUser;
 }
 
