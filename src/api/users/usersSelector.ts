@@ -10,8 +10,6 @@ export const selectIsLoading = (state: { users: { loading: boolean } }) =>
 export const selectIsError = (state: { users: { error: unknown } }) =>
   state.users.error;
 
-// export const selectFilter = (state: { filter: unknown }) => state.filter;
-
 export const selectFilterName = (state: {
   filter: { filter: { name: string } };
 }) => state.filter.filter.name;
