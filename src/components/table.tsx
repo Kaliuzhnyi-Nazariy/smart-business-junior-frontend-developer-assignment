@@ -11,13 +11,8 @@ import {
   selectIsLoading,
 } from "../api/users/usersSelector";
 import { IUser } from "../TypesAndInterfaces/typesOrInterfaces";
-// import {
-//   updateFilterEmail,
-//   updateFilterName,
-//   updateFilterPhone,
-//   updateFilterUsername,
-// } from "../api/users/filterSlice";
 import Input from "./Input";
+import { TbTriangleInvertedFilled, TbTriangleFilled } from "react-icons/tb";
 
 const Table = () => {
   const dispatch = useAppDispatch();
@@ -26,18 +21,24 @@ const Table = () => {
   const [positionUsername, setpositionUsername] = useState("down");
   const [positionEmail, setpositionEmail] = useState("down");
   const [positionPhone, setpositionPhone] = useState("down");
+  const [previousField, setPreviousField] = useState<string>("");
 
+  const users = useSelector(selectUsers);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
+    if (previousField === "" && usersList.length < users.length) {
+      setUsersList(users);
+      setpositionName("down");
+      setpositionUsername("down");
+      setpositionEmail("down");
+      setpositionPhone("down");
+    }
+  }, [previousField, users, usersList]);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
-
-  const users = useSelector(selectUsers);
 
   useEffect(() => {
     setUsersList(users);
@@ -162,48 +163,20 @@ const Table = () => {
     }
   };
 
-  const [previousField, setPreviousField] = useState<string>("");
-
   return (
     <div className="">
-      {/* <input
-        type="text"
-        placeholder="name"
-        onChange={(e) => {
-          dispatch(updateFilterName(e.target.value));
-        }}
-      />
-      <input
-        type="text"
-        placeholder="email"
-        onChange={(e) => {
-          dispatch(updateFilterEmail(e.target.value));
-        }}
-      />
-      <input
-        type="text"
-        placeholder="username"
-        onChange={(e) => {
-          dispatch(updateFilterUsername(e.target.value));
-        }}
-      />
-      <input
-        type="text"
-        placeholder="phone"
-        onChange={(e) => {
-          dispatch(updateFilterPhone(e.target.value));
-        }}
-      /> */}
-
       <table>
         <thead>
           <tr>
             <th style={{ outline: "2px solid white", padding: "8px" }}>
               name
               <button onClick={() => handleSoritng("name")}>
-                {positionName === "down" ? "🔻" : "🔼"}
+                {positionName === "down" ? (
+                  <TbTriangleInvertedFilled />
+                ) : (
+                  <TbTriangleFilled />
+                )}
               </button>
-              {/* <Input inputField="name" /> */}
               <Input
                 inputField="name"
                 previousField={previousField}
@@ -213,9 +186,12 @@ const Table = () => {
             <th style={{ outline: "2px solid white", padding: "8px" }}>
               username
               <button onClick={() => handleSoritng("username")}>
-                {positionUsername === "down" ? "🔻" : "🔼"}
+                {positionUsername === "down" ? (
+                  <TbTriangleInvertedFilled />
+                ) : (
+                  <TbTriangleFilled />
+                )}
               </button>
-              {/* <Input inputField="username" /> */}
               <Input
                 inputField="username"
                 previousField={previousField}
@@ -225,9 +201,12 @@ const Table = () => {
             <th style={{ outline: "2px solid white", padding: "8px" }}>
               e-mail
               <button onClick={() => handleSoritng("email")}>
-                {positionEmail === "down" ? "🔻" : "🔼"}
+                {positionEmail === "down" ? (
+                  <TbTriangleInvertedFilled />
+                ) : (
+                  <TbTriangleFilled />
+                )}
               </button>
-              {/* <Input inputField="email" /> */}
               <Input
                 inputField="email"
                 previousField={previousField}
@@ -237,9 +216,12 @@ const Table = () => {
             <th style={{ outline: "2px solid white", padding: "8px" }}>
               phone
               <button onClick={() => handleSoritng("phone")}>
-                {positionPhone === "down" ? "🔻" : "🔼"}
+                {positionPhone === "down" ? (
+                  <TbTriangleInvertedFilled />
+                ) : (
+                  <TbTriangleFilled />
+                )}
               </button>
-              {/* <Input inputField="phone" /> */}
               <Input
                 inputField="phone"
                 previousField={previousField}
@@ -293,7 +275,7 @@ const Table = () => {
         )}
       </table>
 
-      <button
+      {/* <button
         onClick={() => {
           setUsersList(users);
           setpositionPhone("down");
@@ -303,7 +285,7 @@ const Table = () => {
         }}
       >
         Reset
-      </button>
+      </button> */}
     </div>
   );
 };
