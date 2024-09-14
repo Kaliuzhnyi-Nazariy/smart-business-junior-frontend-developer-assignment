@@ -268,7 +268,6 @@ const Table = () => {
                   <td
                     style={{
                       outline: "2px solid white",
-                      //padding: "8px"
                     }}
                     className={styles.bodyTableStyles}
                   >
@@ -277,7 +276,6 @@ const Table = () => {
                   <td
                     style={{
                       outline: "2px solid white",
-                      //padding: "8px"
                     }}
                     className={styles.bodyTableStyles}
                   >
@@ -286,7 +284,6 @@ const Table = () => {
                   <td
                     style={{
                       outline: "2px solid white",
-                      //padding: "8px"
                     }}
                     className={styles.bodyTableStyles}
                   >
@@ -295,7 +292,6 @@ const Table = () => {
                   <td
                     style={{
                       outline: "2px solid white",
-                      //padding: "8px"
                     }}
                     className={styles.bodyTableStyles}
                   >
