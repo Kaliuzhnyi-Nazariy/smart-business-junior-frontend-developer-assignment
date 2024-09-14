@@ -8,6 +8,7 @@ import {
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { IoSearch } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
+import styles from "./input.module.css";
 
 interface Prop {
   inputField: string;
@@ -50,23 +51,25 @@ const Input = ({ inputField, previousField, setPreviousField }: Prop) => {
   };
 
   return previousField === inputField ? (
-    <>
+    <div className={styles.inputField}>
       <input
         type="text"
+        autoFocus
         placeholder={inputField}
         onChange={(e) => {
           setFieldInput(e.target.value);
           handleInputChange(e.target.value);
         }}
         value={fieldInput}
+        className={styles.input}
       />
-      <button onClick={handleCloseField}>
+      <button onClick={handleCloseField} className={styles.buttonStyle}>
         <IoMdClose />
       </button>
-    </>
+    </div>
   ) : (
-    <button onClick={handleOpenField}>
-      <IoSearch></IoSearch>
+    <button onClick={handleOpenField} className={styles.buttonStyle}>
+      <IoSearch />
     </button>
   );
 };
