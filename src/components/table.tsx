@@ -13,6 +13,7 @@ import {
 import { IUser } from "../TypesAndInterfaces/typesOrInterfaces";
 import Input from "./Input";
 import { TbTriangleInvertedFilled, TbTriangleFilled } from "react-icons/tb";
+import styles from "./table.module.css";
 
 const Table = () => {
   const dispatch = useAppDispatch();
@@ -164,69 +165,97 @@ const Table = () => {
   };
 
   return (
-    <div className="">
+    <div className={styles.tablePlace}>
       <table>
         <thead>
           <tr>
-            <th style={{ outline: "2px solid white", padding: "8px" }}>
-              name
-              <button onClick={() => handleSoritng("name")}>
-                {positionName === "down" ? (
-                  <TbTriangleInvertedFilled />
-                ) : (
-                  <TbTriangleFilled />
-                )}
-              </button>
-              <Input
-                inputField="name"
-                previousField={previousField}
-                setPreviousField={setPreviousField}
-              />
+            <th className={styles.tableHead}>
+              <div className={styles.headContainer}>
+                <h4 style={{ fontWeight: "8px" }}>Name</h4>
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => handleSoritng("name")}
+                    className={styles.button}
+                  >
+                    {positionName === "down" ? (
+                      <TbTriangleInvertedFilled />
+                    ) : (
+                      <TbTriangleFilled />
+                    )}
+                  </button>
+                  <Input
+                    inputField="name"
+                    previousField={previousField}
+                    setPreviousField={setPreviousField}
+                  />
+                </div>
+              </div>
             </th>
-            <th style={{ outline: "2px solid white", padding: "8px" }}>
-              username
-              <button onClick={() => handleSoritng("username")}>
-                {positionUsername === "down" ? (
-                  <TbTriangleInvertedFilled />
-                ) : (
-                  <TbTriangleFilled />
-                )}
-              </button>
-              <Input
-                inputField="username"
-                previousField={previousField}
-                setPreviousField={setPreviousField}
-              />
+            <th className={styles.tableHead}>
+              <div className={styles.headContainer}>
+                <h4 style={{ fontWeight: "8px" }}>Username</h4>
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => handleSoritng("username")}
+                    className={styles.button}
+                  >
+                    {positionUsername === "down" ? (
+                      <TbTriangleInvertedFilled />
+                    ) : (
+                      <TbTriangleFilled />
+                    )}
+                  </button>
+                  <Input
+                    inputField="username"
+                    previousField={previousField}
+                    setPreviousField={setPreviousField}
+                  />
+                </div>
+              </div>
             </th>
-            <th style={{ outline: "2px solid white", padding: "8px" }}>
-              e-mail
-              <button onClick={() => handleSoritng("email")}>
-                {positionEmail === "down" ? (
-                  <TbTriangleInvertedFilled />
-                ) : (
-                  <TbTriangleFilled />
-                )}
-              </button>
-              <Input
-                inputField="email"
-                previousField={previousField}
-                setPreviousField={setPreviousField}
-              />
+            <th className={styles.tableHead}>
+              <div className={styles.headContainer}>
+                <h4 style={{ fontWeight: "8px" }}>E-mail</h4>
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => handleSoritng("email")}
+                    className={styles.button}
+                  >
+                    {positionEmail === "down" ? (
+                      <TbTriangleInvertedFilled />
+                    ) : (
+                      <TbTriangleFilled />
+                    )}
+                  </button>
+                  <Input
+                    inputField="email"
+                    previousField={previousField}
+                    setPreviousField={setPreviousField}
+                  />
+                </div>
+              </div>
             </th>
-            <th style={{ outline: "2px solid white", padding: "8px" }}>
-              phone
-              <button onClick={() => handleSoritng("phone")}>
-                {positionPhone === "down" ? (
-                  <TbTriangleInvertedFilled />
-                ) : (
-                  <TbTriangleFilled />
-                )}
-              </button>
-              <Input
-                inputField="phone"
-                previousField={previousField}
-                setPreviousField={setPreviousField}
-              />
+            <th className={styles.tableHead}>
+              <div className={styles.headContainer}>
+                <h4>Phone</h4>
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => handleSoritng("phone")}
+                    className={styles.button}
+                  >
+                    {positionPhone === "down" ? (
+                      <TbTriangleInvertedFilled />
+                    ) : (
+                      <TbTriangleFilled />
+                    )}
+                  </button>
+                  <Input
+                    inputField="phone"
+                    previousField={previousField}
+                    setPreviousField={setPreviousField}
+                  />
+                </div>
+              </div>
             </th>
           </tr>
         </thead>
@@ -235,18 +264,42 @@ const Table = () => {
           <tbody>
             {usersList.length > 0 ? (
               usersList.map((user: IUser) => (
-                <tr key={user.id}>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.name}
+                <tr key={user.id} style={{ height: "50px" }}>
+                  <td
+                    style={{
+                      outline: "2px solid white",
+                      //padding: "8px"
+                    }}
+                    className={styles.bodyTableStyles}
+                  >
+                    <p className={styles.textInTd}>{user.name}</p>
                   </td>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.username}
+                  <td
+                    style={{
+                      outline: "2px solid white",
+                      //padding: "8px"
+                    }}
+                    className={styles.bodyTableStyles}
+                  >
+                    <p className={styles.textInTd}>{user.username}</p>
                   </td>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.email}
+                  <td
+                    style={{
+                      outline: "2px solid white",
+                      //padding: "8px"
+                    }}
+                    className={styles.bodyTableStyles}
+                  >
+                    <p className={styles.textInTd}>{user.email}</p>
                   </td>
-                  <td style={{ outline: "2px solid white", padding: "8px" }}>
-                    {user.phone}
+                  <td
+                    style={{
+                      outline: "2px solid white",
+                      //padding: "8px"
+                    }}
+                    className={styles.bodyTableStyles}
+                  >
+                    <p className={styles.textInTd}>{user.phone}</p>
                   </td>
                 </tr>
               ))
@@ -274,7 +327,6 @@ const Table = () => {
           </tbody>
         )}
       </table>
-
       {/* <button
         onClick={() => {
           setUsersList(users);

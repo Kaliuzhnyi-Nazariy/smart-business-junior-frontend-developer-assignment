@@ -1,0 +1,90 @@
+.tablePlace {
+  display: flex;
+  flex-direction: column;
+}
+
+.headContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  font-size: 10px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+    height: 48px;
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 520px) {
+    gap: 4px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    gap: 8px;
+  }
+}
+
+.button {
+  width: 12px;
+  height: 16px;
+  padding: 0;
+  color: white;
+
+  @media screen and (min-width: 768px) {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.tableHead {
+  outline: 2px solid white;
+  padding: 0 4px;
+  position: relative;
+  min-width: 60px;
+  max-width: 70px;
+
+  height: 40px;
+
+  @media screen and (min-width: 768px) {
+    min-width: 150px;
+    max-width: none;
+  }
+
+  @media screen and (min-width: 1440px) {
+    min-width: 300px;
+    padding: 0 16px;
+  }
+}
+
+.bodyTableStyles {
+  max-width: 60px;
+  max-height: 40px;
+  overflow-x: scroll;
+
+  @media screen and (min-width: 768px) {
+    overflow: auto;
+  }
+}
+
+.textInTd {
+  margin: 0 4px;
+  font-size: 10px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    font-size: 20px;
+  }
+}
