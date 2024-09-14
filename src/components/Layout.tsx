@@ -1,3 +1,5 @@
+import styles from "./layout.module.css";
+
 interface Prop {
   children: React.ReactNode;
 }
@@ -5,14 +7,24 @@ interface Prop {
 const Layout = ({ children }: Prop) => {
   return (
     <>
-      <header>
-        <h2>Kaliuzhnyi Nazarii</h2>
+      <header className={styles.headerContainer}>
+        <h2>
+          <a href="https://kaliuzhnyi-nazariy.github.io/my-portfolio/">
+            Kaliuzhnyi Nazarii
+          </a>
+        </h2>
         <h3>Users List</h3>
       </header>
       <div>{children}</div>
-      <footer>
-        {" "}
-        <h2>Kaliuzhnyi Nazarii</h2>
+      <footer className={styles.footer}>
+        <h2>Users List</h2>
+        <p>
+          &copy;{" "}
+          <a href="https://kaliuzhnyi-nazariy.github.io/my-portfolio/">
+            Kaliuzhnyi Nazarii
+          </a>
+          , 2024
+        </p>
       </footer>
     </>
   );
