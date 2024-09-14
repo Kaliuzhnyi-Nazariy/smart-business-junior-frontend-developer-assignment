@@ -56,8 +56,8 @@ a {
 }
 
 button {
-  background-color: white;
-  /* background-color: transparent; */
+  /* background-color: white; */
+  background-color: transparent;
   width: 12px;
   height: 12px;
   display: flex;
